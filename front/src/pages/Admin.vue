@@ -24,14 +24,30 @@ import { useAuthStore } from '../stores/auth';
 <template>
   <div>
     <h1>Admin Dashboard</h1>
-    <input v-model="username" placeholder="Username" />
-    <input v-model="password" type="password" placeholder="Password" />
-    <select v-model="role">
-      <option value="journalist">Journalist</option>
-      <option value="admin">Admin</option>
+      <legend className="fieldset-legend text-4xl p-5">Add employee</legend>
+
+    <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xl border p-4">
+
+
+    <input v-model="username" placeholder="Username" className="input w-xl"/>
+    <input v-model="password" type="password" placeholder="Password"  className="input w-xl"/>
+    <select v-model="role" className="select w-xl">
+      <option value="journalist" className="input">Journalist</option>
+      <option value="admin" className="input">Admin</option>
     </select>
-    <button @click="submit">Create User</button>
-    <p v-if="success">{{ success }}</p>
-    <p v-if="error">{{ error }}</p>
+    <button @click="submit" className="btn btn-success mt-4 w-xl">Create User</button>
+    <div v-if="success" class="chat chat-start">
+  <div class="chat-bubble chat-bubble-primary">
+    <p>{{ success }}</p>
+  </div>
+</div>
+    
+<div v-if="error" class="chat chat-end">
+  <div class="chat-bubble chat-bubble-error">
+    <p>{{ error }}</p>
+  </div>
+</div>
+    
+    </fieldset>
   </div>
 </template>

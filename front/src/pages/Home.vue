@@ -6,11 +6,11 @@ import { useAuthStore } from '../stores/auth'
 </script>
 
 <template>
-  <div>
-    <h1>Home Page</h1>
+  <div class="card"> 
+    <h1 class="card-title">Home Page</h1>
     <p v-if="auth.isAdmin">You are admin</p>
     <p v-if="auth.isJournalist">You are journalist</p>
-    <button @click="auth.logout">Logout</button>
+    <button @click="auth.logout" class="card-actions card-title">Logout</button>
   </div>
 </template>
 

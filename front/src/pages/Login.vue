@@ -30,12 +30,24 @@ const handleLogin = async()=>{
 
 
 <template>
-  <div>
-    <h1>Login</h1>
+
+    <div className="hero bg-base-200 hero-content flex flex-col justify-center items=text-center">
+ 
+    <div className="text-center lg:text-left">
+    <h1 className="text-4xl font-bold py-6">Login</h1>
+   </div>
+     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+      <div className="card-body">
     <form @submit.prevent="handleLogin">
-      <input v-model="username" placeholder="Username" />
-      <input type="password" v-model="password" placeholder="Password" />
-      <button type="submit">Login</button>
+       <fieldset className="fieldset">
+      <input v-model="username" placeholder="Username" className="input"/>
+      <input type="password" v-model="password" placeholder="Password" className="input"/>
+      <button type="submit" className="btn btn-neutral mt-4">Login</button>
+    </fieldset>
     </form>
-  </div>
+   
+    </div>
+    </div>
+    </div>
+  
 </template>
