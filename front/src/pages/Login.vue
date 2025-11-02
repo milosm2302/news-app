@@ -13,11 +13,15 @@ import { useRouter } from 'vue-router';
 const handleLogin = async()=>{
     try {
         await auth.login(username.value, password.value)
-        router.push('/')
+        if(auth.isAdmin){
+            router.push('/admin/panel')
+        }else{
+            router.push('/admin/journalist')
+        }
+       
     } catch (error) {
         alert('login failed')
     }
-    return {username, password, handleLogin}
 
 }
 
@@ -31,22 +35,22 @@ const handleLogin = async()=>{
 
 <template>
 
-    <div className="hero bg-base-200 hero-content flex flex-col justify-center items=text-center">
+    <div class="w-full min-h-[80vh] bg-base-200 flex flex-col justify-center items-center p-6 gap-4">
  
-    <div className="text-center lg:text-left">
-    <h1 className="text-4xl font-bold py-6">Login</h1>
+    <div class="text-center lg:text-left">
+    <h1 class="text-4xl font-bold py-6">Login</h1>
    </div>
-     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-      <div className="card-body">
+     <div class="bg-base-100 w-full max-w-sm shrink-0 shadow-2xl mb-8">
+     
     <form @submit.prevent="handleLogin">
-       <fieldset className="fieldset">
-      <input v-model="username" placeholder="Username" className="input"/>
-      <input type="password" v-model="password" placeholder="Password" className="input"/>
-      <button type="submit" className="btn btn-neutral mt-4">Login</button>
-    </fieldset>
+       <div class="flex flex-col gap-5 items-center justify-center">
+      <input v-model="username" required placeholder="Username" class="input mt-10 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300"/>
+      <input type="password" required v-model="password" placeholder="Password" class="input focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300"/>
+      <button type="submit" :disabled="!username || !password" class="max-w-sm bg-green-200 px-14 py-2 rounded-xl my-4 mb-8 border border-transparent cursor-pointer hover:border-blue-500 font-bold disabled:bg-gray-400 disabled:cursor-not-allowed">Login</button>
+    </div>
     </form>
    
-    </div>
+   
     </div>
     </div>
   
