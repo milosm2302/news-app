@@ -1,12 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../pages/Home.vue'
+import HomeJournalist from '../pages/journalists/HomeJournalist.vue'
 import Login from '../pages/Login.vue'
-import Admin from '../pages/Admin.vue'
+import Admin from '../pages/admin/Admin.vue'
 import { useAuthStore } from '../stores/auth'
 const routes = [
     { path: '/', component: Home },
-    { path: '/login', component: Login },
-    { path: '/admin', component: Admin, meta: { requiresAuth: true, requiresAdmin: true } }
+
+    { path: '/admin', component: Login },
+    { path: '/admin/journalist', component: HomeJournalist, meta: { requiresAuth: true } },
+    { path: '/admin/panel', component: Admin, meta: { requiresAuth: true, requiresAdmin: true } }
 ]
 const router = createRouter({
     history: createWebHistory(),
@@ -20,12 +23,12 @@ router.beforeEach((to, from, next) => {
     }
 
     if (to.meta.requiresAuth && !auth.isLoggedIn) {
-        return next('/login')
+        return next('/admin')
+    }
+    if (to.meta.requiresAdmin && !auth.isAdmin) {
+        return next('admin/journalist')
     }
 
-    if (to.meta.requiresAdmin && !auth.isAdmin) {
-        return next('/')
-    }
 
     next()
 })
